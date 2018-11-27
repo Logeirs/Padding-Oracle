@@ -47,7 +47,9 @@ def main():
 
                 #print value, oracle(new_cipher)
                 if send(new_cipher):        #padding valid, can be either a value that produces the padding we want, or the original value
-                    if chr(value) == block1[byte_pos]: continue #if value found is the same as the original, then ignore and continue
+                    if chr(value) == block1[byte_pos]: 
+                        original=True
+                        continue #if value found is the same as the original, then ignore and continue
                     if chr(value) != block1[byte_pos]:
                         char = j ^ ord(block1[byte_pos]) ^ value         #char = 1 ^ block1[15] ^ value
                         decrypted[byte_pos]=char
@@ -61,7 +63,7 @@ def main():
 
                         break
 
-                if value==255:
+                if value==255 and original:
                     # if no other solution, this means that the value is the same as the original
                     # therefore, for the first round that means the original padding is 1
                     # otherwise we are now at the point where we found the original padding: say the original padding is 12, there will be a moment when we will look for a padding of 12, hence the value is the same
@@ -73,8 +75,13 @@ def main():
                     sys.stdout.flush()                  
 
                     block1_part2 = calculate_block1_part2(padding, block1, decrypted)
+                    original = False
 
                     break
+
+                if value==255 and not original:
+                    print "ERROR"
+                    sys.exit()
         
 
         ciphertext=ciphertext[:-BLOCK_LEN]  # remove the last block
