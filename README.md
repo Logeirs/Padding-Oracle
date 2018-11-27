@@ -8,4 +8,4 @@ https://pentesterlab.com/exercises/padding_oracle
 Pad.py is used in order to detect a Padding Oracle vulnerability. It only rotates the last byte of the second last block and writes the results in a text file.
 This text file can then be used with Burp Intruder.
 
-Padding Oracle.py is the script that will exploit the vulnerability. You need to update the parameters at the end according to your needs, more specifically "URL", "COOKIES" and "cookie", as well as the return condition in `send()`.
+Padding_oracle.py is the script that will exploit the vulnerability. You need to update the parameters at the end according to your needs, more specifically "URL", "COOKIES" and "cookie", as well as the return condition in `send()`.
