@@ -46,7 +46,7 @@ def main():
                 new_cipher=beg+new_block1+block2
 
                 #print value, oracle(new_cipher)
-                if send(new_cipher) == True:        #padding valid, can be either a value that produces the padding we want, or the original value
+                if send(new_cipher):        #padding valid, can be either a value that produces the padding we want, or the original value
                     if chr(value) == block1[byte_pos]: continue #if value found is the same as the original, then ignore and continue
                     if chr(value) != block1[byte_pos]:
                         char = j ^ ord(block1[byte_pos]) ^ value         #char = 1 ^ block1[15] ^ value
